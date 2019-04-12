@@ -1,0 +1,110 @@
+//animations
+@keyframes bounce {
+  from,
+  20%,
+  53%,
+  80%,
+  to {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translateY(0);
+  }
+
+  40%,
+  43% {
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translateY(-30px);
+  }
+
+  70% {
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translateY(-15px);
+  }
+
+  90% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes bounceOut {
+  20% {
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+
+  50%,
+  55% {
+    opacity: 1;
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: fadeIn;
+}
+.fadeOut {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: fadeOut;
+}
+
+@keyframes hop {
+    0% {
+        transform: translate(0, 0)
+    }
+    50% {
+        transform: translate(0, -5px)
+    }
+    100% {
+        transform: translate(0, 0)
+    }
+}
+
+@keyframes puddle {
+    0% {
+        bottom: -5px;
+        background-position: 0px 100%;
+        background-size: 60px 8px
+    }
+    50% {
+        bottom: -10px;
+        background-position: 15px 100%;
+        background-size: 30px 8px
+    }
+    100% {
+        bottom: -5px;
+        background-position: 0px 100%;
+        background-size: 60px 8px
+    }
+}
+//change form autocomplete styles
+@keyframes autofill {
+  to {
+      color: $gray-700;
+      background: transparent;
+  }
+}

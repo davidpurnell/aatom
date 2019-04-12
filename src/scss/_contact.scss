@@ -1,0 +1,82 @@
+// Styling for the contact section
+section#contact {
+  input:autofill {
+    animation-name: autofill;
+    animation-fill-mode: both;
+  }
+  .form-control {
+    @include typewriter-font;
+    padding: 0.5rem 1rem;
+    color: $gray-700;
+    background-color: $white;
+    border: 1px solid $gray-500;
+    border-radius: 0.375rem;
+    box-shadow: none;
+    transition: box-shadow 250ms cubic-bezier(0.27, 0.01, 0.38, 1.06), border 250ms cubic-bezier(0.27, 0.01, 0.38, 1.06);
+    &:hover {
+      border-color: $blue;
+    }
+    &:focus {
+      color: $gray-700;
+      background-color: $white;
+      border-color: $blue;
+      box-shadow: 0 0.313rem 0.719rem rgba(0, 123, 255, 0.1), 0 0.156rem 0.125rem rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  .form-control::-webkit-input-placeholder { //Chrome/Opera/Safari
+    color: $gray-400;
+    //@include typewriter-font;
+  }
+  .form-control:-ms-input-placeholder { //MS IE 10+
+    color: $gray-400;
+    //@include typewriter-font;
+  }
+  .form-control::-ms-input-placeholder { //MS Edge
+    color: $gray-400;
+    //@include typewriter-font;
+  }
+  .form-control:-moz-placeholder { //Firefox 18-
+    color: $gray-400;
+    //@include typewriter-font;
+  }
+  .form-control::-moz-placeholder { //Firefox 19+
+    color: $gray-400;
+    //@include typewriter-font;
+  }
+  .form-control::placeholder {
+    color: $gray-400;
+    //@include typewriter-font;
+  }
+
+  select.form-control {
+    height: calc(2.5rem + 2px);
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .valid-feedback {
+    margin-top: 0.25rem;
+    font-size: $font-size-xx-small;
+    color: $color-valid;
+  }
+
+  .was-validated .form-control:valid {
+    border-color: $color-valid;
+  }
+
+  .invalid-feedback {
+    margin-top: 0.25rem;
+    font-size: $font-size-xx-small;
+    color: $color-invalid;
+  }
+
+  .was-validated .form-control:invalid {
+    border-color: $color-invalid;
+    box-shadow: 0 5px 11.5px rgba(196, 24, 60, 0.1);
+    &:focus {
+      box-shadow: 0 5px 11.5px rgba(196, 24, 60, 0.1), 0 1px 1px 0.1rem rgba(196, 24, 60, 0.2);
+    }
+  }
+}

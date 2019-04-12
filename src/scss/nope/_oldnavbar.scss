@@ -1,0 +1,82 @@
+// Styling for the navbar
+#mainNav {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: none;
+  background-color: transparent;
+  //background-color: pink;
+  &.translucent {
+    background-color: $white-trans;
+  }
+  .navbar-brand {
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    font-size: 1.75em;
+    color: $primary;
+    @include heading-font;
+    &.active,
+    &:active,
+    &:focus,
+    &:hover {
+      color: darken($primary, 20%);
+    }
+    img {
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      transition: all 0.3s;
+      height: 100px;
+      width: 100px;
+    }
+  }
+  .navbar-nav {
+    flex-direction: column;
+    text-align: right;
+    .nav-item {
+      .nav-link {
+        font-size: 90%;
+        font-weight: 400;
+        padding: 0.25em 0;
+        letter-spacing: 1px;
+        color: black;
+        @include heading-font;
+        &.active,
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+@media(min-width:768px) {
+  #mainNav {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin-bottom: 20px;
+    .navbar-nav {
+      flex-direction: row;
+      .nav-item {
+        .nav-link {
+          padding: 1.1em 1em !important;
+        }
+      }
+    }
+    &.navbar-shrink {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      .navbar-brand {
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+        font-size: 1.25em;
+        img {
+          height: 70px;
+          width: 70px;
+        }
+      }
+    }
+  }
+}

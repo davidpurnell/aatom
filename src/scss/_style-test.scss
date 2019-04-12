@@ -1,0 +1,100 @@
+
+//for section layout testing
+.masthead.testing { background-color: grey; }
+#intro.testing { background-color: green; }
+#services.testing { background-color: pink; }
+#about.testing { background-color: yellow; }
+#contact.testing { background-color: teal; }
+#mainNav.translucent.testing { background-color: rgba($white,.6) !important; }
+
+//color swatches
+.bg-gray-100 { background-color: $gray-100 !important; }
+.bg-gray-200 { background-color: $gray-200 !important; }
+.bg-gray-300 { background-color: $gray-300 !important; }
+.bg-gray-400 { background-color: $gray-400 !important; }
+.bg-gray-500 { background-color: $gray-500 !important; }
+.bg-gray-600 { background-color: $gray-600 !important; }
+.bg-gray-700 { background-color: $gray-700 !important; }
+.bg-gray-800 {  background-color:$gray-800 !important; }
+.bg-gray-900 { background-color: $gray-900 !important; }
+.bg-black { background-color: $black !important; }
+.bg-almostblack { background-color: $almostblack !important; }
+.bg-almostwhite { background-color: $almostwhite !important; }
+.bg-almostwhite2 { background-color: $almostwhite2 !important; }
+.bg-pale-blue { background-color: $pale-blue !important; }
+.bg-blue { background-color: $blue !important; }
+.bg-green { background-color: $green !important; }
+.bg-red { background-color: $red !important; }
+.bg-corn-yellow { background-color: $corn-yellow !important; }
+.bg-charcoal { background-color: $charcoal !important; }
+.bg-pastel-red { background-color: $pastel-red !important; }
+//affable atom logo colors
+.bg-the-blue-a { background-color: $the-blue-a !important; }
+.bg-the-orbits { background-color: $the-orbits !important; }
+
+//mastadon color scheme
+.bg-dark-background { background-color: $dark-background !important; }
+.bg-less-dark-background { background-color: $less-dark-background !important; }
+.bg-darkish-gray { background-color: $darkish-gray !important; }
+.bg-paleish-blue { background-color: $paleish-blue !important; }
+.bg-off-white { background-color: $off-white !important; }
+.bg-bluish-blue { background-color: $bluish-blue !important; }
+
+//site color scheme
+.bg-my-primary { background-color: $color-primary !important; }
+.bg-my-secondary { background-color: $color-secondary !important; }
+.bg-my-tertiary { background-color: $color-tertiary !important; }
+.bg-links { background-color: $color-links !important; }
+.bg-links-accent { background-color: $color-links-accent !important; }
+.bg-valid { background-color: $color-valid !important; }
+.bg-invalid { background-color: $color-invalid !important; }
+
+//fonts
+.regular-font { @include regular-font; }
+.light-font { @include light-font; }
+.bold-font { @include bold-font; }
+.gothic-font { @include gothic-font; }
+.typewriter-font { @include typewriter-font; }
+.typewriter-italic-font { @include typewriter-italic-font; }
+
+.styles-block {
+  padding: 1em;
+}
+
+.color-box {
+  height: 15vw;
+  width: 15vw;
+  display: inline-flex;
+  align-items:center;
+  text-align: center;
+  line-height: 15vw;
+  font-size: 20vw;
+  margin-right: -4px;
+  position: relative;
+}
+
+#testing_toggle {
+  cursor: pointer;
+}
+#dev_toggles {
+  //display: none;
+  appearance: none;
+  border: 0;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0.2;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 3em;
+  left: 0.5em;
+  height: 2em;
+  width: 2em;
+  padding: 0.25em;
+  text-align: center;
+  transition: opacity 0.2s ease-out;
+  font-size: 1.5em;
+  cursor: pointer;
+  z-index: 1;
+  &:hover {
+    opacity: 1;
+  }
+}
