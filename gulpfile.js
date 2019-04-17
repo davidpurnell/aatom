@@ -1,24 +1,31 @@
 //core packages
-var gulp = require('gulp')
-var sass = require('gulp-sass')
-var del = require('del')
-var concat = require('gulp-concat')
-var order = require('gulp-order')
-var gulpif = require('gulp-if')
-var fs = require('fs') //part of node, ie not a separate package
+var gulp = require('gulp-help')(require('gulp'),['hideDepsMessage']);
+var sass = require('gulp-sass');
+var del = require('del');
+var concat = require('gulp-concat');
+//rsync and deps
+var rsync = require('gulp-rsync');
+var log = require('fancy-log');
+var colors = require('ansi-colors');
+var PluginError = require('plugin-error');
+var prompt = require('gulp-prompt');
+var gulpif = require('gulp-if');
+var argv = require('minimist')(process.argv);
 //processing, cleaning, minifying
-var inject = require('gulp-inject')
-var sourcemaps = require('gulp-sourcemaps')
-var postcss = require('gulp-postcss')
-var uncss = require('postcss-uncss');
-var autoprefixer = require('autoprefixer')
-var uglify = require('gulp-uglify')
-var htmlclean = require('gulp-htmlclean')
-var realFavicon = require ('gulp-real-favicon')
-var useref = require('gulp-useref')
+var sourcemaps = require('gulp-sourcemaps');
+var postcss = require('gulp-postcss');
+var autoprefixer = require('autoprefixer');
+var uglify = require('gulp-uglify');
+var htmlclean = require('gulp-htmlclean');
+var realFavicon = require ('gulp-real-favicon');
+var fs = require('fs');
 //developement server
-var browserSync = require('browser-sync').create()
+var browserSync = require('browser-sync').create();
 
+//don't need these?
+//var pkg = require('./package.json');
+//var cleanCSS = require('gulp-clean-css');
+//var rename = require("gulp-rename");
 
 // configuration variables
 var paths = {
@@ -26,199 +33,202 @@ var paths = {
   srcSCSS: 'src/scss/**/*.scss',
   srcJS: 'src/js/**/*.js',
   srcIMG: 'src/img/**/*',
-  srcFavIcons: 'src/favicons/*',
+  dev: 'dev',
+  devIndex: 'dev/index.html', // use with inject:dev later
+  devHTML: 'dev/**/*.html',
+  devCSS: 'dev/**/*.css', // use with inject:dev later
+  devJS: 'dev/**/*.js', // use with inject:dev later
+  dist: 'dist',
+  distIndex: 'dist/index.html', // use with inject:dist later
+  distHTML: 'dist/**/*.html',
+  distCSS: 'dist/**/*.css', // use with inject:dist later
+  distJS: 'dist/**/*.js', // use with inject:dist later
+
   vendorBsCSS: 'node_modules/bootstrap/dist/css/bootstrap.css',
   vendorBsJS: 'node_modules/bootstrap/dist/js/bootstrap.js', //does not include Popper
   vendorJQ: 'node_modules/jquery/dist/jquery.js',
   vendorJQE: 'node_modules/jquery.easing/jquery.easing.js',
 
-  dev: 'dev',
-  devIndex: 'dev/index.html', // use with inject:dev later
-  devCSS: 'dev/**/*.css', // use with inject:dev later
-  devJS: 'dev/**/*.js', // use with inject:dev later
+  srcFavIconMaster: 'assets/nav-logo.svg',
+  srcFavIcons: 'src/favicons'
+};
+var files = {
+  js: 'affable.js' //replace this kludge with inject
+};
 
-  devJQ: 'jquery.js',
-  devJQE: 'jquery.easing.js',
-  devBsCSS: 'bootstrap.css',
-  devBsJS: 'bootstrap.js',
-  devMyCSS: 'affable.css',
-  devMyJS: 'affable.js',
-
-  dist: 'dist',
-  distIndex: 'dist/index.html', // use with inject:dist later
-  distCSS: 'dist/**/*.css', // use with inject:dist later
-  distJS: 'dist/**/*.js', // use with inject:dist later
-
-  FavIconMaster: 'assets/nav-logo.svg',
-  FavIcons: 'src/favicons'
-}
+var postcssProcessors = [
+  autoprefixer({browsers: ['> 1%']})
+  //add plugin to remove unused/unreferenced css styles?
+];
 
 // build the dev folder
-// cp favicons from src & vendor files from /node_modules
-function cpStatic() {
+// cp vendor files from /node_modules
+gulp.task('cpvendor',false, function() {
   return gulp
     .src([
-      paths.srcFavIcons,
       paths.vendorBsCSS,
       paths.vendorBsJS,
       paths.vendorJQ,
       paths.vendorJQE
     ])
-    .pipe(gulp.dest(paths.dev))
-}
-//inject js & css references into html
-function injectHtml() {
-  return gulp.src(paths.devIndex)
-    .pipe(inject(gulp.src(paths.devCSS, {read: false})
-    .pipe(order([
-      paths.devBsCSS,
-      paths.devMyCSS
-    ])), {relative: true}))
-    .pipe(inject(gulp.src(paths.devJS, {read: false})
-    .pipe(order([
-      paths.devJQ,
-      paths.devJQE,
-      paths.devBsJS,
-      paths.devMyJS
-    ])), {relative: true}))
-    .pipe(gulp.dest(paths.dev))
-}
+    .pipe(gulp.dest(paths.dev));
+});
 //cp HTML
-function cpHtml() {
+gulp.task('cphtml',false, function () {
   return gulp.src(paths.srcHTML)
 	.pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code))
-  .pipe(gulp.dest(paths.dev))
-}
+  .pipe(gulp.dest(paths.dev));
+});
 //cp IMG
-function cpImg() {
-  return gulp.src(paths.srcIMG)
-  .pipe(gulp.dest(paths.dev))
-}
+gulp.task('cpimg',false, function () {
+  return gulp.src(paths.srcIMG).pipe(gulp.dest(paths.dev));
+});
 //cp JS
-function cpJs() {
-  return gulp.src(paths.srcJS)
-  .pipe(gulp.dest(paths.dev))
-}
+gulp.task('cpjs',false, function () {
+  return gulp
+    .src(paths.srcJS)
+    .pipe(concat(files.js))
+    .pipe(gulp.dest(paths.dev));
+});
 // process SCSS
-function processSCSS() {
-  var plugins = [
-    autoprefixer({browsers: ['> 1%']})
-    //add plugin to remove unused/unreferenced css styles?
-  ]
-
+gulp.task('processSCSS',false, function() {
   return gulp
     .src(paths.srcSCSS)
-    .pipe(sourcemaps.init())
+    //.pipe(sourcemaps.init())
     .pipe(sass.sync({ errLogToConsole: true, outputStyle: 'expanded' }).on('error', sass.logError))
-    .pipe(postcss(plugins))
-    .pipe(sourcemaps.write())
+    //.pipe(sourcemaps.write(paths.dev))
+    .pipe(postcss(postcssProcessors))
     .pipe(gulp.dest(paths.dev))
-}
-//build the dist folder
-//cp static files from dev to dist
-function cpDist() {
-  return gulp
-    .src([
-      paths.dev + '/*',
-      '!' + paths.devIndex,
-      '!' + paths.devCSS,
-      '!' + paths.devJS
-     ])
-    .pipe(gulp.dest(paths.dist))
-}
-//inject css, js references and concat files from dev to dist
-function userefDist() {
-  return gulp
-    .src(paths.devIndex)
-    .pipe(useref())
-    .pipe(gulp.dest(paths.dist))
-}
+});
+//cp FavIcons
+gulp.task('cpfav',false, function () {
+  var FavFiles = paths.srcFavIcons + '/*';
+  return gulp.src(FavFiles).pipe(gulp.dest(paths.dev));
+});
 
-function uncssDist() {
-  var plugins = [
-    uncss({
-      html: [paths.distIndex],
-      ignore: [/#mainNav.*/,/.+\.testing/,/\.alert.*/,/.*close.*/,'.fadeIn','.fadeOut']
-    }),
-  ];
-  return gulp.src(paths.distCSS)
-    .pipe(postcss(plugins))
+// build production folder
+//cp HTML
+gulp.task('cphtml:dist',false, function () {
+  return gulp
+    .src(paths.srcHTML)
+		.pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code))
+    .pipe(htmlclean())
     .pipe(gulp.dest(paths.dist));
-};
+});
+//cp IMG
+gulp.task('cpimg:dist',false, function () {
+  //optimize SVG here? other formats too?
+  return gulp.src(paths.srcIMG).pipe(gulp.dest(paths.dist));
+});
+//minify, cp JS
+gulp.task('cpjs:dist',false, function () {
+  return gulp
+    .src(paths.srcJS)
+    .pipe(concat(files.js))
+    .pipe(uglify())
+    .pipe(gulp.dest(paths.dist));
+});
+// process SCSS
+gulp.task('processSCSS:dist',false, function() {
+  return gulp
+    .src(paths.srcSCSS)
+    .pipe(sass.sync({ errLogToConsole: true, outputStyle: 'compressed' }).on('error', sass.logError))
+    .pipe(postcss(postcssProcessors))
+    .pipe(gulp.dest(paths.dist))
+});
+//
+//cp FavIcons
+gulp.task('cpfav:dist',false, function () {
+  var FavFiles = paths.srcFavIcons + '/*';
+  return gulp.src(FavFiles).pipe(gulp.dest(paths.dist));
+});
 
-//start a browserSync instance
+
+//Watch src files
+gulp.task('watchSrc',false, function() {
+  gulp.watch(paths.srcHTML, ['cphtml']);
+  gulp.watch(paths.srcIMG, ['cpimg']);
+  gulp.watch(paths.srcJS, ['cpjs']);
+  gulp.watch(paths.srcSCSS, ['processSCSS']);
+});
+
+//functions
 function browserSyncInit(baseDir, files) {
   browserSync.instance = browserSync.init(files, {
     startPath: '/',
     server: {
       baseDir: baseDir
-    },
-    ghostMode: false
-  })
+    }
+  });
 }
-//throw an error
 function throwError(taskName, msg) {
   throw new PluginError({
       plugin: taskName,
       message: msg
-    })
-}
-//Watch src files for changes
-function watchSrc() {
-  gulp.watch(paths.srcHTML, gulp.series(cpHtml,injectHtml))
-  gulp.watch(paths.srcIMG, cpImg)
-  gulp.watch(paths.srcJS, cpJs)
-  gulp.watch(paths.srcSCSS, processSCSS)
+    });
 }
 
-//delete stuff
-function cleanDev() {
-  return del(paths.dev)
-}
-function cleanDist() {
-  return del(paths.dist)
-}
-//start Dev server
-function startDevServer() {
-  browserSyncInit(paths.dev, paths.dev)
-}
-//start Dist server
-function startDistServer() {
-  browserSyncInit(paths.dist)
-}
-//builds the dev folder
-gulp.task('build', gulp.series(gulp.parallel(cpStatic, cpHtml, cpImg, cpJs, processSCSS), injectHtml))
-gulp.task('build').description = 'build the dev folder'
-//builds the dist folder
-gulp.task('build:dist', gulp.series('build',gulp.parallel(cpDist,userefDist),uncssDist))
-gulp.task('build:dist').description = 'build the dist folder'
-// starts a development server
-gulp.task('serve', gulp.series('build', gulp.parallel(startDevServer,watchSrc)))
-gulp.task('serve').description = 'build dev from src, start dev server, watch src for changes'
-// starts a development server
-gulp.task('serve:dist', gulp.series('build:dist', startDistServer))
-gulp.task('serve:dist').description = 'build dev from src, build dist from dev, start dist server'
+//Rsync
+gulp.task('deploy','rsync dist to the internet', ['build:dist'], function() {
 
-//delete dev and production builds
-gulp.task('clean', gulp.parallel(cleanDev,cleanDist))
-gulp.task('clean').description = 'empties build folders'
-gulp.task('clean').flags = {
-  '--dev': 'empties the dev folder',
-  '--dist': 'empties the dist folder'
-}
+  // Dirs and Files to sync
+  rsyncPaths = [paths.dist];
 
+  // Default options for rsync
+  rsyncConf = {
+    progress: true,
+    incremental: true,
+    relative: true,
+    emptyDirectories: true,
+    recursive: true,
+    clean: true,
+    exclude: [],
+    compress: true,
+    root: paths.dist,
+    hostname: 'www.purnell.io',
+    port: '809',
+    username: 'dave',
+  };
 
+  // Staging
+  if (argv.staging) {
+    rsyncConf.destination = '/var/www/dev.affable-atom.com/html'; // path where uploaded files go
+  // Production
+  } else if (argv.production) {
+    rsyncConf.destination = '/var/www/affable-atom.com/html'; // path where uploaded files go
+  // Missing/Invalid Target
+  } else {
+    throwError('deploy', colors.red('Missing or invalid target'));
+  }
+
+  // Use gulp-rsync to sync the files
+  return gulp.src(rsyncPaths)
+  .pipe(gulpif(
+      argv.production,
+      prompt.confirm({
+        message: 'Heads Up! Are you SURE you want to push to PRODUCTION?',
+        default: false
+      })
+  ))
+  .pipe(rsync(rsyncConf));
+  }, {
+    options: {
+      'staging': 'sync to dev site',
+      'production': 'sync to live site'
+    }
+});
+//
 //RealFaviconGenerator
 // File where the favicon markups are stored
-var FAVICON_DATA_FILE = 'faviconData.json'
+var FAVICON_DATA_FILE = 'faviconData.json';
 // Generate the icons. This task takes a few seconds to complete.
 // You should run it at least once to create the icons. Then,
 // you should run it whenever RealFaviconGenerator updates its
 // package (see the check-for-favicon-update task below).
-gulp.task('generate-favicon', function(done) {
+gulp.task('generate-favicon','generate favicons', function(done) {
 	realFavicon.generateFavicon({
-		masterPicture: paths.FavIconMaster,
-		dest: paths.FavIcons,
+		masterPicture: paths.srcFavIconMaster,
+		dest: paths.srcFavIcons,
 		iconsPath: '/',
 		design: {
 			ios: {
@@ -274,20 +284,46 @@ gulp.task('generate-favicon', function(done) {
 		},
 		markupFile: FAVICON_DATA_FILE
 	}, function() {
-		done()
-	})
-})
+		done();
+	});
+});
 
 // Check for updates on RealFaviconGenerator (think: Apple has just
 // released a new Touch icon along with the latest version of iOS).
 // Run this task from time to time. Ideally, make it part of your
 // continuous integration system.
-gulp.task('check-for-favicon-update', function(done) {
-	var currentVersion = JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).version
+gulp.task('check-for-favicon-update', 'checks for updates on RealFaviconGenerator', function(done) {
+	var currentVersion = JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).version;
 	realFavicon.checkForUpdates(currentVersion, function(err) {
 		if (err) {
-			throw err
+			throw err;
 		}
-	})
-  done()
-})
+	});
+});
+
+// Master tasks
+
+// starts a development server
+gulp.task('serve','build src & start dev server', ['build', 'watchSrc'], function () {
+  browserSyncInit([ paths.dev ], [ paths.dev ]);
+});
+// starts a production server
+gulp.task('serve:dist','build src & start production server', ['build:dist'], function () {
+  browserSyncInit(paths.dist);
+});
+// run all dev build tasks
+gulp.task('build','build src to dev', ['cphtml', 'cpimg', 'processSCSS', 'cpjs', 'cpfav']);
+// run all production build tasks
+gulp.task('build:dist','build src to dist', ['cphtml:dist', 'cpimg:dist', 'processSCSS:dist', 'cpjs:dist', 'cpfav:dist']);
+//clean everything
+gulp.task('clean','clean dev & dist', ['clean:dev', 'clean:dist']);
+//empty dev folder
+gulp.task('clean:dev','clean dev', function () {
+  del(paths.dev);
+});
+//empty production folder
+gulp.task('clean:dist','clean dist', function () {
+  del(paths.dist);
+});
+// Default task
+gulp.task('default', ['help']);
