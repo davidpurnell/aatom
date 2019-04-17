@@ -9,7 +9,8 @@
   z-index: 1;
   border: 0 none;
 
-  transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+  transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1),
+    box-shadow 200ms ease;
 
   &:hover {
     box-shadow: 0px 12px 19px -7px rgba(0, 0, 0, 0.3);
@@ -17,8 +18,8 @@
   }
 
   &.no-transition:hover {
-      box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
-      transform: none;
+    box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+    transform: none;
   }
 
   .card-top {
@@ -26,10 +27,10 @@
     background-position: center;
     background-repeat: no-repeat;
     &.lani {
-      background-image: url(ring2.svg);
+      background-image: url("../img/ring2.svg");
     }
     &.dave {
-      background-image: url(ring.svg);
+      background-image: url("../img/ring.svg");
     }
   }
   .card-body {
@@ -45,27 +46,27 @@
       margin-bottom: 5px;
       margin-top: 15px;
     }
-    .card-social {
-      //style the twitter links here?
-    }
+    // .card-social {
+    //style the twitter links here?
+    // }
   }
 
   img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px 12px 0 0;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px 12px 0 0;
   }
 
   //turning off this class yields the larger, card filling images...
   .card-avatar {
-      max-width: 140px;
-      max-height: 140px;
-      margin: 15px auto 15px;
-      border-radius: 50%;
-      overflow: hidden;
+    max-width: 140px;
+    max-height: 140px;
+    margin: 15px auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
 
-      &.border-gray {
-          border: 0px solid $gray-400;
-      }
+    &.border-gray {
+      border: 0px solid $gray-400;
+    }
   }
 }

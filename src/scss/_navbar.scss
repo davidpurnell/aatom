@@ -6,7 +6,7 @@
   border: none;
   background-color: transparent;
   &.translucent {
-    background-color: rgba($white,.95);
+    background-color: rgba($white, 0.95);
   }
   .navbar-brand {
     transition: all 0.3s;
@@ -37,7 +37,7 @@
           color: $color-secondary;
         }
         &:hover {
-          @media (hover:hover) {
+          @media (hover: hover) {
             color: $color-secondary;
           }
         }
@@ -45,18 +45,18 @@
     }
   }
 }
-@media(min-width:768px) {
+@media (min-width: 768px) {
   #mainNav {
     .navbar-brand {
-      @media (hover:hover) {
-        &:hover {
+      @media (hover: hover) {
+        &.bouncing:hover {
           animation: hop 1s;
           animation-iteration-count: infinite;
         }
         &::before {
           opacity: 0;
         }
-        &:hover::before {
+        &.bouncing:hover::before {
           opacity: 0.5;
           position: absolute;
           left: 0;
@@ -65,7 +65,7 @@
           height: 8px;
           width: 76px;
           display: block;
-          background-image: url('/shadow.png');
+          background-image: url("../img/shadow.png");
           background-size: 60px 8px;
           background-repeat: no-repeat;
           animation: puddle 1s;

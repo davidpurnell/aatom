@@ -1,0 +1,260 @@
+<% if (htmlWebpackPlugin.options.env.Dev) { %>
+<!-- Styles Test Screen UI toggles -->
+<div id="dev_toggles">
+  <a class="plain-link" data-toggle="modal" href="#stylestestModal"
+    ><i class="fas fa-asterisk"></i
+  ></a>
+  <a id="testing_toggle" class="plain-link"><i class="fas fa-star"></i></a>
+</div>
+<!-- Styles Test Screen Modal -->
+<div
+  class="modal modal-fullscreen"
+  id="stylestestModal"
+  tabindex="-1"
+  role="dialog"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <!-- color swatches -->
+        <div class="styles-block">
+          <h5>bootstrap swatches</h5>
+          <div class="color-box bg-primary">
+            <h6 class="mx-auto text-white">primary</h6>
+          </div>
+          <div class="color-box bg-secondary">
+            <h6 class="mx-auto text-white">secondary</h6>
+          </div>
+          <div class="color-box bg-success">
+            <h6 class="mx-auto text-white">success</h6>
+          </div>
+          <div class="color-box bg-danger">
+            <h6 class="mx-auto text-white">danger</h6>
+          </div>
+          <div class="color-box bg-warning">
+            <h6 class="mx-auto">warning</h6>
+          </div>
+          <div class="color-box bg-info">
+            <h6 class="mx-auto text-white">info</h6>
+          </div>
+          <div class="color-box bg-light"><h6 class="mx-auto">light</h6></div>
+          <div class="color-box bg-dark">
+            <h6 class="mx-auto text-white">dark</h6>
+          </div>
+          <div class="color-box bg-white"><h6 class="mx-auto">white</h6></div>
+        </div>
+        <div class="styles-block">
+          <h5>color swatches</h5>
+          <div class="color-box bg-gray-100">
+            <h6 class="mx-auto">gray-100</h6>
+          </div>
+          <div class="color-box bg-gray-200">
+            <h6 class="mx-auto">gray-200</h6>
+          </div>
+          <div class="color-box bg-gray-300">
+            <h6 class="mx-auto">gray-300</h6>
+          </div>
+          <div class="color-box bg-gray-400">
+            <h6 class="mx-auto">gray-400</h6>
+          </div>
+          <div class="color-box bg-gray-500">
+            <h6 class="mx-auto">gray-500</h6>
+          </div>
+          <div class="color-box bg-gray-600">
+            <h6 class="mx-auto text-white">gray-600</h6>
+          </div>
+          <div class="color-box bg-gray-700">
+            <h6 class="mx-auto text-white">gray-700</h6>
+          </div>
+          <div class="color-box bg-gray-800">
+            <h6 class="mx-auto text-white">gray-800</h6>
+          </div>
+          <div class="color-box bg-gray-900">
+            <h6 class="mx-auto text-white">gray-900</h6>
+          </div>
+          <div class="color-box bg-black">
+            <h6 class="mx-auto text-white">black</h6>
+          </div>
+          <div class="color-box bg-almostblack">
+            <h6 class="mx-auto text-white">almostblack</h6>
+          </div>
+          <div class="color-box bg-almostwhite">
+            <h6 class="mx-auto">almostwhite</h6>
+          </div>
+          <div class="color-box bg-almostwhite2">
+            <h6 class="mx-auto">almostwhite2</h6>
+          </div>
+          <div class="color-box bg-green">
+            <h6 class="mx-auto text-white">green</h6>
+          </div>
+          <div class="color-box bg-red">
+            <h6 class="mx-auto text-white">red</h6>
+          </div>
+          <div class="color-box bg-pale-blue">
+            <h6 class="mx-auto text-white">pale blue</h6>
+          </div>
+          <div class="color-box bg-blue">
+            <h6 class="mx-auto text-white">blue</h6>
+          </div>
+          <div class="color-box bg-corn-yellow">
+            <h6 class="mx-auto text-white">corn yellow</h6>
+          </div>
+          <div class="color-box bg-charcoal">
+            <h6 class="mx-auto text-white">charcoal</h6>
+          </div>
+          <div class="color-box bg-pastel-red">
+            <h6 class="mx-auto text-white">pastel-red</h6>
+          </div>
+        </div>
+        <div class="styles-block">
+          <h5>Splash Screen Logo colors</h5>
+          <div class="color-box bg-the-blue-a">
+            <h6 class="mx-auto text-white">the-blue-a</h6>
+          </div>
+          <div class="color-box bg-the-orbits">
+            <h6 class="mx-auto text-white">the-orbits</h6>
+          </div>
+        </div>
+        <div class="styles-block">
+          <h5>site color scheme</h5>
+          <div class="color-box bg-my-primary">
+            <h6 class="mx-auto text-white">primary</h6>
+          </div>
+          <div class="color-box bg-my-secondary">
+            <h6 class="mx-auto text-white">secondary</h6>
+          </div>
+          <div class="color-box bg-my-tertiary">
+            <h6 class="mx-auto text-white">tertiary</h6>
+          </div>
+          <div class="color-box bg-links">
+            <h6 class="mx-auto text-white">link</h6>
+          </div>
+          <div class="color-box bg-links-accent">
+            <h6 class="mx-auto text-white">link accent</h6>
+          </div>
+          <div class="color-box bg-valid">
+            <h6 class="mx-auto text-white">valid</h6>
+          </div>
+          <div class="color-box bg-invalid">
+            <h6 class="mx-auto text-white">invalid</h6>
+          </div>
+        </div>
+        <div class="styles-block">
+          <h5>mastadon color scheme</h5>
+          <div class="color-box bg-dark-background">
+            <h6 class="mx-auto text-white">dark</h6>
+          </div>
+          <div class="color-box bg-less-dark-background">
+            <h6 class="mx-auto text-white">less-dark</h6>
+          </div>
+          <div class="color-box bg-darkish-gray">
+            <h6 class="mx-auto text-white">darkish-gray</h6>
+          </div>
+          <div class="color-box bg-paleish-blue">
+            <h6 class="mx-auto text-white">paleish-blue</h6>
+          </div>
+          <div class="color-box bg-off-white">
+            <h6 class="mx-auto text-white">off-white</h6>
+          </div>
+          <div class="color-box bg-bluish-blue">
+            <h6 class="mx-auto text-white">bluish-blue</h6>
+          </div>
+        </div>
+        <!-- typography test section -->
+        <div class="styles-block">
+          <h1>H1.Thinking in textures</h1>
+          <h2>H2.Thinking in textures</h2>
+          <h3>H3.Thinking in textures</h3>
+          <h4>H4.Thinking in textures</h4>
+          <h5>H5.Thinking in textures</h5>
+          <h6>H6.Thinking in textures</h6>
+        </div>
+        <div class="styles-block">
+          <p class="regular-font">
+            Regular. Ridiculus Dapibus Mollis Euismod Tristique
+          </p>
+          <p class="light-font">
+            Light. Ridiculus Dapibus Mollis Euismod Tristique
+          </p>
+          <p class="bold-font">
+            Bold. Ridiculus Dapibus Mollis Euismod Tristique
+          </p>
+          <p class="gothic-font">
+            Gothic. Ridiculus Dapibus Mollis Euismod Tristique
+          </p>
+          <p class="typewriter-font">
+            Typewriter. Ridiculus Dapibus Mollis Euismod Tristique
+          </p>
+          <p class="typewriter-italic-font">
+            Typewriter Italic. Ridiculus Dapibus Mollis Euismod Tristique
+          </p>
+        </div>
+        <div class="styles-block">
+          <p>
+            Paragraph. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+            nibh. Nullam id dolor id nibh ultricies vehicula ut id elit. Duis
+            mollis, est non commodo luctus, nisi erat porttitor ligula. Maecenas
+            sed diam eget risus varius blandit sit amet non magna. Etiam porta
+            sem malesuada magna mollis euismod. Donec ullamcorper nulla non
+            metus auctor fringilla.
+          </p>
+        </div>
+        <div class="styles-block">
+          <p class="dropcap">
+            Dropcap Paragraph. Fusce dapibus, tellus ac cursus commodo, tortor
+            mauris nibh. Nullam id dolor id nibh ultricies vehicula ut id elit.
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            Maecenas sed diam eget risus varius blandit sit amet non magna.
+            Etiam porta sem malesuada magna mollis euismod. Donec ullamcorper
+            nulla non metus auctor fringilla. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit. Duis mollis, est non commodo luctus,
+            nisi erat porttitor ligula, eget lacinia odio sem nec elit. Vivamus
+            sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+            Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit
+            non mi porta gravida at eget metus.
+          </p>
+        </div>
+        <div class="styles-block">
+          <p class="text-muted">
+            Muted text. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+            nibh.
+          </p>
+        </div>
+        <div class="styles-block">
+          <small>small text. Ligula Egestas Purus Mattis Dapibus</small>
+        </div>
+        <div class="styles-block">
+          <h4><a href="#">Anchor. An anchory thing, anchorfully done.</a></h4>
+        </div>
+        <div class="styles-block">
+          <article>
+            <p class="dropcap">
+              Article with Dropcap first paragraph followed by more paragraphs.
+              Donec id elit non mi porta gravida at eget metus. Nullam id dolor
+              id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis
+              interdum. Cum sociis natoque penatibus et magnis dis parturient
+              montes, nascetur ridiculus mus. Sed posuere consectetur est at
+              lobortis.
+            </p>
+            <p>
+              Integer posuere erat a ante venenatis dapibus posuere velit
+              aliquet. Donec ullamcorper nulla non metus auctor fringilla.
+              Nullam quis risus eget urna mollis ornare vel eu leo. Aenean
+              lacinia bibendum nulla sed consectetur.
+            </p>
+            <p>
+              Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
+              eget lacinia odio sem nec elit. Cum sociis natoque penatibus et
+              magnis dis parturient montes, nascetur ridiculus mus. Cras justo
+              odio, dapibus ac facilisis in, egestas eget quam.
+            </p>
+          </article>
+        </div>
+        <!-- end of typography test section -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of Styles Test Screen Modal -->
+<% } %>
