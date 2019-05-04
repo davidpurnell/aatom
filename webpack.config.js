@@ -59,7 +59,8 @@ const productionConfig = merge([
       ]
     }
   }),
-  parts.buildPage(PATHS)
+  parts.buildPage(PATHS),
+  parts.cpNetlify(PATHS)
 ]);
 
 const developmentConfig = merge([
