@@ -173,53 +173,18 @@ $("#contactForm").submit(function(event) {
     event.stopPropagation();
     document.getElementById("contact").scrollIntoView();
   } else {
-    var thename = $("input#thename").val();
-    var theemail = $("input#theemail").val();
-    var thephone = $("input#thephone").val();
-    var theproject = $("textarea#theproject").val();
-    var theworktype = $("select#theworktype").val();
-    var thetimeline = $("input#thetimeline").val();
-    var thewebsite = $("input#thewebsite").val();
-    var theassets = $("select#theassets").val();
-    var thebudget = $("select#thebudget").val();
-    var thewhere = $("input#thewhere").val();
-
     var $thatsend = $("#TheSendButton");
     // Disable submit button until AJAX call is complete to prevent duplicate messages
     $thatsend.prop("disabled", true);
 
-    $.ajax({
-      url: "/#contact",
-      type: "POST",
-      data: {
-        name: thename,
-        email: theemail,
-        phone: thephone,
-        project_description: theproject,
-        work_type: theworktype,
-        timeline: thetimeline,
-        website_url: thewebsite,
-        assets_status: theassets,
-        budget: thebudget,
-        heard_about_us: thewhere
-      },
-      cache: false,
-      success: function() {
-        // Success message
+    var $form = $(this);
+    $.post($form.attr("action"), $form.serialize()).then(function() {
+        // alert("Thank you!");
         var resultText = "Your message has been sent.";
         showAndDismissAlert("success", resultText);
-      },
-      error: function() {
-        // Fail message
-        var resultText =
-          "Sorry, it seems that my mail server is not responding. Please try again later!";
-        showAndDismissAlert("danger", resultText);
-      },
-      complete: function() {
         setTimeout(function() {
           $thatsend.prop("disabled", false); // Re-enable submit button when AJAX call is complete
         }, 5750);
-      }
     });
   }
   this.classList.add("was-validated");
