@@ -330,7 +330,13 @@
         </div>
         <div class="row">
           <div class="col-12 col-md-8 offset-md-2">
-            <form class="pt-4" id="contactForm" novalidate>
+            <form class="pt-4" data-netlify="true" netlify-honeypot="bot-field" id="contactForm" novalidate>
+              <div hidden aria-hidden="true">
+                <label>
+                  Don’t fill this out if you're human: 
+                  <input name="bot-field" />
+                </label>
+              </div>
               <div class="form-row">
                 <div class="form-group col-md-4 mb-3">
                   <label for="thename">Name</label>
@@ -429,7 +435,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <span class="copyright">Copyright &copy; Affable Atom 2018</span>
+            <span class="copyright">Copyright &copy; Affable Atom 2018-2019</span>
           </div>
         </div>
       </div>
