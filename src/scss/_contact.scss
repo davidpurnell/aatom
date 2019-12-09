@@ -50,6 +50,9 @@ section#contact {
   }
 
   select.form-control {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     height: calc(2.5rem + 2px);
     &:hover {
       cursor: pointer;
