@@ -189,7 +189,7 @@ $("#contactForm").submit(function(event) {
     $thatsend.prop("disabled", true);
 
     $.ajax({
-      url: "/",
+      url: "/#contact",
       type: "POST",
       data: {
         name: thename,
