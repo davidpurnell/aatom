@@ -84,17 +84,13 @@ $window.on("activate.bs.scrollspy", function() {
 });
 // make Navbar translucent on scroll
 var navbarChange = function() {
-  //alert('scrolling');
-  // console.log("running navbarChange");
   if ($mainNav.offset().top > 100) {
     $mainNav.addClass("translucent");
     $navBrand.addClass("bouncing");
-    // console.log("adding translucent");
   } else {
     $mainNav.removeClass("translucent");
     $navBrand.removeClass("bouncing");
     $(".navbar-title").empty();
-    // console.log("removing translucent");
   }
 };
 //fade masthead graphic on scroll
@@ -103,13 +99,10 @@ var fadeAtoms = function() {
   var animation_begin_pos = 0; //where you want the animation to begin
   var animation_end_pos = 0.7 * $(window).height();
   var theHeight = $(window).height();
-  // console.log("the height:" + theHeight);
 
   scroll_pos = $(this).scrollTop();
-  // console.log("position: " + scroll_pos);
   if (scroll_pos >= animation_begin_pos && scroll_pos <= animation_end_pos) {
     var opacity = 1 - scroll_pos / (animation_end_pos - animation_begin_pos);
-    console.log("opacity:" + opacity);
     $("header").css("opacity", opacity);
   }
 };
