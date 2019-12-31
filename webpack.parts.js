@@ -131,7 +131,8 @@ exports.loadImages = ({ options } = {}) => ({
             options: {
               // name: "[name].[ext]",
               name: "[name].[hash:4].[ext]",
-              limit: 10000
+              limit: 10000,
+              esModule: false
             }
           },
           {
