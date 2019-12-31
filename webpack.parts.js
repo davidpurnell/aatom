@@ -66,6 +66,7 @@ exports.extractCSS = ({ html }) => {
     // /.+\.testing/,
     ".fadeIn",
     ".fadeOut",
+    /\.dropcap*/,
     //bootstrap specific
     /\.alert.*/,
     /\.fade.*/,
