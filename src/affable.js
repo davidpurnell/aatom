@@ -38,18 +38,15 @@ library.add(
 );
 dom.watch(); // Kicks off the process of finding <i> tags and replacing with <svg>
 
-// console.log("Hello cruel world");
-
 //jquery
 import $ from "jquery";
 import "jquery.easing";
-// window.jQuery = $;
-// window.$ = $;
 
 //popover activation
 // $(function() {
 //   $('[data-toggle="popover"]').popover();
 // });
+
 //selector caching for performance...
 var $window = $(window),
   $mainNav = $("#mainNav"),
@@ -95,23 +92,21 @@ var navbarChange = function() {
 };
 //fade masthead graphic on scroll
 var fadeAtoms = function() {
-  var scroll_pos = 0;
-  var animation_begin_pos = 0; //where you want the animation to begin
-  var animation_end_pos = 0.7 * $(window).height();
-  var theHeight = $(window).height();
+  var scrollPos = 0;
+  var animationBeginPos = 0; //where you want the animation to begin
+  var animationEndPos = 0.7 * $(window).height();
 
-  scroll_pos = $(this).scrollTop();
-  if (scroll_pos >= animation_begin_pos && scroll_pos <= animation_end_pos) {
-    var opacity = 1 - scroll_pos / (animation_end_pos - animation_begin_pos);
+  scrollPos = $(this).scrollTop();
+  if (scrollPos >= animationBeginPos && scrollPos <= animationEndPos) {
+    var opacity = 1 - scrollPos / (animationEndPos - animationBeginPos);
     $("header").css("opacity", opacity);
   }
 };
-//navbarChange(); // run now if page is not at top
 $window.scroll(navbarChange); // translucent Navbar on scroll
 $window.on("scroll resize", fadeAtoms);
 
 //toggle layout testing classes
-$("#testing_toggle").click(function() {
+$("#testing-toggle").click(function() {
   if ($(".masthead").hasClass("testing")) {
     $(".masthead").removeClass("testing");
     $("#intro").removeClass("testing");
@@ -166,9 +161,9 @@ $("#contactForm").submit(function(event) {
     event.stopPropagation();
     document.getElementById("contact").scrollIntoView();
   } else {
-    var $thatsend = $("#TheSendButton");
+    var $thatSend = $("#TheSendButton");
     // Disable submit button until AJAX call is complete to prevent duplicate messages
-    $thatsend.prop("disabled", true);
+    $thatSend.prop("disabled", true);
 
     var $form = $(this);
     $.post($form.attr("action"), $form.serialize()).then(function() {
@@ -176,15 +171,15 @@ $("#contactForm").submit(function(event) {
         var resultText = "Your message has been sent.";
         showAndDismissAlert("success", resultText);
         setTimeout(function() {
-          $thatsend.prop("disabled", false); // Re-enable submit button when AJAX call is complete
+          $thatSend.prop("disabled", false); // Re-enable submit button when AJAX call is complete
         }, 5750);
     });
   }
   this.classList.add("was-validated");
 
   //When clicking on Name box, hide fail/success boxes
-  $("#thename").focus(function() {
+  $("#theName").focus(function() {
     $("#success").html("");
-    $thatsend.prop("disabled", false); // Re-enable submit button
+    $thatSend.prop("disabled", false); // Re-enable submit button
   });
 });
