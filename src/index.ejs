@@ -425,13 +425,13 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <span class="copyright">&copy;Affable Atom 2023</span>
+            <span class="copyright">&copy;Affable Atom 2019-2022</span>
           </div>
         </div>
       </div>
     </footer>
-    <% if (htmlWebpackPlugin.options.env.Dev) { %>
-      <%= require('html-loader!./testing.html') %>
+    <% if (process.env.NODE_ENV === "development") { %>
+      <%= require('./testing.html') %>
     <% } %>
   </body>
 </html>

@@ -5,19 +5,24 @@
 a {
   text-decoration: none;
 
-  &:not(.plain-link)  {
+  &:not(.plain-link) {
     color: $color-links;
     @include bold-font;
     padding: 10px 0;
-    background-image: linear-gradient($color-links-underline, $color-links-underline);
+    background-image: linear-gradient(
+      $color-links-underline,
+      $color-links-underline
+    );
     background-repeat: no-repeat;
     background-size: 100% 1px;
     background-position: center bottom 29%;
     background-origin: padding-box;
-    text-shadow: 3px 0 $white, 2px 0 $white, 1px 0 $white, -1px 0 $white, -2px 0 $white, -3px 0 $white;
+    text-shadow: 3px 0 $white, 2px 0 $white, 1px 0 $white, -1px 0 $white,
+      -2px 0 $white, -3px 0 $white;
 
-    &:hover, &:focus {
-      @media (hover:hover) {
+    &:hover,
+    &:focus {
+      @media (hover: hover) {
         color: $color-links-accent;
       }
       text-decoration: none;
@@ -42,7 +47,7 @@ h6 {
 
 h1,
 h2 {
-  letter-spacing: -.015em;
+  letter-spacing: -0.015em;
 }
 
 h1 {
@@ -52,28 +57,28 @@ h1 {
 }
 
 h2 {
-    font-size: $font-size-x-large;
+  font-size: $font-size-x-large;
 }
 
 h3 {
-    font-size: $font-size-large;
+  font-size: $font-size-large;
 }
 
 h4 {
-    font-size: $font-size-medium;
+  font-size: $font-size-medium;
 }
 
 h5,
 p,
 ul,
 ol {
-    font-size: $font-size;
+  font-size: $font-size;
 }
 
 small {
-    color: $gray-700;
-    font-size: $font-size-small;
-    @include light-font;
+  color: $gray-700;
+  font-size: $font-size-small;
+  @include light-font;
 }
 
 h6 {
@@ -87,16 +92,16 @@ strong {
 }
 
 article {
-    margin-bottom: $spacing-large;
+  margin-bottom: $spacing-large;
 }
 
 article p {
-    margin-bottom: $spacing;
+  margin-bottom: $spacing;
 }
 
 article p + p {
-    margin-top: 0;
-    text-indent: $spacing-medium;
+  margin-top: 0;
+  text-indent: $spacing-medium;
 }
 
 //Drop caps
@@ -107,14 +112,15 @@ article p + p {
     float: left;
     @include bold-font;
     font-size: $font-size * 4.9;
-    line-height: .9;
-    @media(min-width:576px) {
+    line-height: 0.9;
+    @media (min-width: 576px) {
       font-size: $font-size * 5;
     }
   }
 }
 @supports (initial-letter: 3) {
   .dropcap::first-letter {
+    padding: 0 5px 0px 0;
     @include bold-font;
     initial-letter: 3;
     color: $color-links-accent;
@@ -134,25 +140,30 @@ article p + p {
     color: $white;
     background-color: $charcoal;
     border-color: $charcoal;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05), 0 4px 10px rgba(0, 123, 255, 0.25);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05),
+      0 4px 10px rgba(0, 123, 255, 0.25);
   }
   &:focus {
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15), 0 3px 15px rgba(0, 123, 255, 0.2), 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15),
+      0 3px 15px rgba(0, 123, 255, 0.2), 0 2px 5px rgba(0, 0, 0, 0.1) !important;
   }
 }
 
-.btn.disabled, .btn:disabled {
+.btn.disabled,
+.btn:disabled {
   color: $charcoal;
   background-color: transparent;
   box-shadow: none;
 }
 
-.btn:not(:disabled):not(.disabled):active, .btn:not(:disabled):not(.disabled).active {
+.btn:not(:disabled):not(.disabled):active,
+.btn:not(:disabled):not(.disabled).active {
   color: $white;
   background-color: $charcoal;
   border-color: $charcoal;
 }
 
-.btn:not(:disabled):not(.disabled):active:focus, .btn:not(:disabled):not(.disabled).active:focus {
+.btn:not(:disabled):not(.disabled):active:focus,
+.btn:not(:disabled):not(.disabled).active:focus {
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important;
 }

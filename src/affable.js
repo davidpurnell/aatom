@@ -40,7 +40,6 @@ dom.watch(); // Kicks off the process of finding <i> tags and replacing with <sv
 
 //jquery
 import $ from "jquery";
-import "jquery.easing";
 
 //popover activation
 // $(function() {
@@ -52,8 +51,8 @@ var $window = $(window),
   $mainNav = $("#mainNav"),
   $navBrand = $(".navbar-brand");
 
-// Smooth scrolling using jQuery easing
-$('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function() {
+// Smooth scrolling using jQuery swing 
+$('a.js-scroll-trigger[href*="#"]:not([href="#"])').on("click",function() {
   if (
     location.pathname.replace(/^\//, "") == this.pathname.replace(/^\//, "") &&
     location.hostname == this.hostname
@@ -65,8 +64,7 @@ $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function() {
         {
           scrollTop: target.offset().top - 54
         },
-        500,
-        "easeInOutExpo"
+        500
       );
       return false;
     }
@@ -102,27 +100,29 @@ var fadeAtoms = function() {
     $("header").css("opacity", opacity);
   }
 };
-$window.scroll(navbarChange); // translucent Navbar on scroll
+$window.on("scroll", navbarChange); // translucent Navbar on scroll
 $window.on("scroll resize", fadeAtoms);
 
 //toggle layout testing classes
-$("#testing-toggle").click(function() {
-  if ($(".masthead").hasClass("testing")) {
-    $(".masthead").removeClass("testing");
-    $("#intro").removeClass("testing");
-    $("#work").removeClass("testing");
-    $("#about").removeClass("testing");
-    $("#contact").removeClass("testing");
-    $mainNav.removeClass("testing");
-  } else {
-    $(".masthead").addClass("testing");
-    $("#intro").addClass("testing");
-    $("#work").addClass("testing");
-    $("#about").addClass("testing");
-    $("#contact").addClass("testing");
-    $mainNav.addClass("testing");
-  }
-});
+if (process.env.NODE_ENV === "development") {
+  $("#testing-toggle").on("click", function () {
+    if ($(".masthead").hasClass("testing")) {
+      $(".masthead").removeClass("testing");
+      $("#intro").removeClass("testing");
+      $("#work").removeClass("testing");
+      $("#about").removeClass("testing");
+      $("#contact").removeClass("testing");
+      $mainNav.removeClass("testing");
+    } else {
+      $(".masthead").addClass("testing");
+      $("#intro").addClass("testing");
+      $("#work").addClass("testing");
+      $("#about").addClass("testing");
+      $("#contact").addClass("testing");
+      $mainNav.addClass("testing");
+    }
+  });
+}; 
 //splash screen modal display
 $("#splashscreenModal").modal("show");
 $(".modal-backdrop").addClass("invisible");
@@ -155,7 +155,7 @@ function showAndDismissAlert(type, message) {
         .removeClass("was-validated");
   }, theDelay + 750);
 }
-$("#contactForm").submit(function(event) {
+$("#contactForm").on("submit",function(event) {
   event.preventDefault(); // prevent default submit behaviour
   if (this.checkValidity() === false) {
     event.stopPropagation();
@@ -178,8 +178,9 @@ $("#contactForm").submit(function(event) {
   this.classList.add("was-validated");
 
   //When clicking on Name box, hide fail/success boxes
-  $("#theName").focus(function() {
+  $("#theName").on("focus",function() {
     $("#success").html("");
+    // console.log('resetting form');
     $thatSend.prop("disabled", false); // Re-enable submit button
   });
 });
