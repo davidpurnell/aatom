@@ -74,14 +74,7 @@ exports.extractCSS = () => {
                 postcssOptions: {
                   plugins: [
                     require("autoprefixer"),
-                    purgecss({
-                      content: ['./**/*.html'],
-                      safelist: {
-                        greedy: [/mainNav/],
-                        standard: [/^fade/],
-                        greedy: [/^alert/],
-                      }
-                    }),
+
                   ]
                 },
               },
