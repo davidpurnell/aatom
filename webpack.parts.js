@@ -78,18 +78,8 @@ exports.extractCSS = () => {
                       content: ['./**/*.html'],
                       safelist: {
                         greedy: [/mainNav/],
-                        standard: [/\.fadeIn/],
-                        standard: [/\.fadeOut/],
-                        standard: [/\.dropcap*/],
-                        deep: [/\.alert/],
-                        standard: [/\.fade.*/],
-                        standard: [/.*close.*/],
-                        standard: [/.*collaps.*/],
-                        standard: [/\..*modal.*/],
-                        standard: [/\.show/],
-                        standard: [/(#|\.)navbar(\-[a-zA-Z]+)?/],
-                        standard: [/(#|\.)(open)/],
-                        standard: [/.*valid.*/],
+                        standard: [/^fade/],
+                        greedy: [/^alert/],
                       }
                     }),
                   ]
