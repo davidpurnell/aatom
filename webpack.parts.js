@@ -74,8 +74,14 @@ exports.extractCSS = () => {
                 postcssOptions: {
                   plugins: [
                     require("autoprefixer"),
-
-                  ]
+                    purgecss({
+                      content: ["src/index.ejs", "**/*.js"],
+                      safelist: {
+                        deep: [/btn/],
+                      },
+                      blocklist: ["testing-toggle"]
+                    }),
+                  ],
                 },
               },
             },
