@@ -129,7 +129,7 @@ $(".modal-backdrop").addClass("invisible");
 setTimeout(function() {
   //dismissed after 2 seconds
   $("#splashscreenModal").modal("hide");
-}, 1000);
+}, 2000);
 
 //form validation and ajax submission
 function showAndDismissAlert(type, message) {
