@@ -2,35 +2,31 @@
 
 // Font Mixins
 @mixin regular-font {
-  font-family: 'tondo', sans-serif;
-  //font-family: 'Montserrat', sans-serif;
+  font-family: "M PLUS Rounded 1c";
   font-weight: 400;
   font-style: normal;
+  // letter-spacing: -0.035em;
 }
+
 @mixin light-font {
-  font-family: 'tondo', sans-serif;
+  font-family: "M PLUS Rounded 1c";
   font-weight: 300;
   font-style: normal;
 }
 @mixin bold-font {
-  font-family: 'tondo', sans-serif;
+  font-family: "M PLUS Rounded 1c";
   font-weight: 700;
   font-style: normal;
 }
 @mixin gothic-font {
-  //font-family: 'Pathway Gothic One',sans-serif;
-  font-family: 'alternate-gothic-no-1-d-n4','alternate-gothic-no-1-d',sans-serif;
-  font-weight: 400;
-  font-style: normal;
+  font-family: "League Gothic";
 }
 @mixin typewriter-font {
-  font-family: "kinesis-pro-3",serif;
-  font-weight: 300;
+  font-family: "Cutive Mono";
   font-style: normal;
 }
 @mixin typewriter-italic-font {
-  font-family: "kinesis-pro-3",serif;
-  font-weight: 300;
+  font-family: "Cutive Mono";
   font-style: italic;
 }
 
