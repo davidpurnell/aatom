@@ -535,24 +535,27 @@
               <div class="form-row">
                 <div class="form-group col-md-6 mb-3">
                   <label for="theWorkType"
-                    >What type of work are you looking for?</label
+                    >What type of work are you looking for?
+                    <select
+                      class="form-control custom-select"
+                      name="theWorkType"
+                    >
+                      <option value=""></option>
+                      <option value="branding">Branding &amp; Identity</option>
+                      <option value="hosting">
+                        Domain/Hosting/Email Services
+                      </option>
+                      <option value="support">Training/Support</option>
+                      <option value="webdesign">Website Design</option>
+                      <option value="maintennce">
+                        Website Maintenance/Migration
+                      </option>
+                    </select></label
                   >
-                  <select class="form-control custom-select" name="theWorkType">
-                    <option value=""></option>
-                    <option value="branding">Branding &amp; Identity</option>
-                    <option value="hosting">
-                      Domain/Hosting/Email Services
-                    </option>
-                    <option value="support">Training/Support</option>
-                    <option value="webdesign">Website Design</option>
-                    <option value="maintennce">
-                      Website Maintenance/Migration
-                    </option>
-                  </select>
                 </div>
                 <div class="form-group col-md-6 mb-3">
                   <label for="theTimeLine"
-                    >What is the timeline for your project? >
+                    >What is the timeline for your project?
                     <input type="text" class="form-control" name="theTimeLine"
                   /></label>
                 </div>
@@ -569,28 +572,34 @@
                   /></label>
                 </div>
                 <div class="form-group col-md-4 mb-3">
-                  <label for="theAssets">Assets</label>
-                  <select class="form-control custom-select" name="theAssets">
-                    <option value=""></option>
-                    <option value="need-help">I need help with content</option>
-                    <option value="content-soon">
-                      Content is being collected
-                    </option>
-                    <option value="content-ready">
-                      Content is ready to go
-                    </option>
-                  </select>
+                  <label for="theAssets"
+                    >Assets
+                    <select class="form-control custom-select" name="theAssets">
+                      <option value=""></option>
+                      <option value="need-help">
+                        I need help with content
+                      </option>
+                      <option value="content-soon">
+                        Content is being collected
+                      </option>
+                      <option value="content-ready">
+                        Content is ready to go
+                      </option>
+                    </select></label
+                  >
                 </div>
                 <div class="form-group col-md-4 mb-3">
-                  <label for="theBudget">Budget</label>
-                  <select class="form-control custom-select" name="theBudget">
-                    <option value=""></option>
-                    <option value="Under $1000">Under $1000</option>
-                    <option value="$1000 - $3000">$1000 - $3000</option>
-                    <option value="$3000 - $5000">$3000 - $5000</option>
-                    <option value="$5000 - $8000">$5000 - $8000</option>
-                    <option value="Over $8000">Over $8000</option>
-                  </select>
+                  <label for="theBudget"
+                    >Budget
+                    <select class="form-control custom-select" name="theBudget">
+                      <option value=""></option>
+                      <option value="Under $1000">Under $1000</option>
+                      <option value="$1000 - $3000">$1000 - $3000</option>
+                      <option value="$3000 - $5000">$3000 - $5000</option>
+                      <option value="$5000 - $8000">$5000 - $8000</option>
+                      <option value="Over $8000">Over $8000</option>
+                    </select></label
+                  >
                 </div>
               </div>
               <div class="form-row">
