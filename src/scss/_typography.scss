@@ -68,6 +68,8 @@ h4 {
   font-size: $font-size-medium;
 }
 
+h4.card-title,
+h4.form-questions,
 h5,
 p,
 ul,
@@ -81,6 +83,7 @@ small {
   @include light-font;
 }
 
+h5.card-category,
 h6 {
   font-size: $font-size-small;
   text-transform: uppercase;
